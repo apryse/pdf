@@ -1,18 +1,18 @@
 use std::env::args;
 
 use pdf::error::PdfError;
-use pdf::file::{FileOptions};
+use pdf::file::FileOptions;
 use pdf::object::{FieldDictionary, FieldType, Resolve};
 
 /// extract and print a PDF's metadata
-#[cfg(feature="cache")]
+#[cfg(feature = "cache")]
 fn main() -> Result<(), PdfError> {
     let path = args()
         .nth(1)
         .expect("Please provide a file path to the PDF you want to explore.");
 
     let file = FileOptions::cached().open(&path).unwrap();
-    dbg!(file.version());
+    //dbg!(file.version());
     let resolver = file.resolver();
 
     if let Some(ref info) = file.trailer.info_dict {
